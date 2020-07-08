@@ -58,8 +58,17 @@ public class GazeTracker : MonoBehaviour
         Vector3 newpos = Camera.main.transform.position + GazeDirectionCombined * LengthOfRay;
         RaycastHit hit;
         Vector3 origin = Camera.main.transform.position - Camera.main.transform.up * 0.05f;
-        Physics.Raycast(origin, GazeDirectionCombinedLocal,  out hit);
+        if(Physics.Raycast(origin, GazeDirectionCombinedLocal,  out hit))
+        {
+            if(hit.transform.gameObject != null)
+        {
+                Debug.LogError("Game Object Name" + hit.transform.gameObject.name);
 
+            }
+        }
+
+        
+        
         GameObject quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
         quad.transform.position = hit.transform.position;
 
