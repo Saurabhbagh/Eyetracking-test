@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\EyetrackingData.cs" />
+    <Compile Include="Assets\GazeTracker.cs" />
     <Compile Include="Assets\TobiiXR\Examples\DataTransparency_Example\DataTransparencyPopup.cs" />
     <Compile Include="Assets\TobiiXR\Examples\DataTransparency_Example\PulsateColor.cs" />
     <Compile Include="Assets\TobiiXR\Examples\HandEyeCoordination_Example\Plugins\Tobii.HEC.Interop.cs" />
