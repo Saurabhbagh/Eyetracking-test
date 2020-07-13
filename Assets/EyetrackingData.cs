@@ -20,8 +20,13 @@ public class EyetrackingData : MonoBehaviour
     private float pupilDiameterLeft, pupilDiameterRight;
     private Vector2 pupilPositionLeft, pupilPositionRight;
     private float eyeOpenLeft, eyeOpenRight;
+   
+
     void Update()
     {
+        
+        Debug.Log(System.DateTime.Now.TimeOfDay.TotalMilliseconds);
+        Debug.Log("Time millisecond"+System.DateTime.Now.Millisecond);
         SRanipal_Eye_API.GetEyeData(ref eyeData);
         SRanipal_Eye.GetVerboseData(out verboseData);
         //pupil diameter    
@@ -47,26 +52,26 @@ public class EyetrackingData : MonoBehaviour
         SRanipal_Eye_API.GetEyeData(ref eyeData);
         SRanipal_Eye.GetVerboseData(out verboseData);
         //pupil diameter    
-        pupilDiameterLeft = EyeData2.verbose_data.left.pupil_diameter_mm;
-        pupilDiameterRight = EyeData2.verbose_data.right.pupil_diameter_mm;
+        pupilDiameterLeft = eyeData.verbose_data.left.pupil_diameter_mm;
+        pupilDiameterRight = eyeData.verbose_data.right.pupil_diameter_mm;
         // pupil positions    
-        pupilPositionLeft = EyeData2.verbose_data.left.pupil_position_in_sensor_area;
-        pupilPositionRight = EyeData2.verbose_data.right.pupil_position_in_sensor_area;
+        pupilPositionLeft = eyeData.verbose_data.left.pupil_position_in_sensor_area;
+        pupilPositionRight = eyeData.verbose_data.right.pupil_position_in_sensor_area;
         // eye open  
-        eyeOpenLeft = EyeData2.verbose_data.left.eye_openness;
-        eyeOpenRight = EyeData2.verbose_data.right.eye_openness;
+        eyeOpenLeft = eyeData.verbose_data.left.eye_openness;
+        eyeOpenRight = eyeData.verbose_data.right.eye_openness;
 
-        Debug.Log("Time Stamp :" + EyeData2.timestamp);
-        Debug.Log("Frame: " + EyeData2.frame_sequence);
-        Debug.Log("Gaze Direction left Normalized : " + EyeData2.verbose_data.left.gaze_direction_normalized);
-        Debug.Log("eye_openness left: " + EyeData2.verbose_data.left.eye_openness);
-        Debug.Log("Gaze Direction Right Normalized : " + EyeData2.verbose_data.right.gaze_direction_normalized);
-        Debug.Log("eye_openness Right: " + EyeData2.verbose_data.right.eye_openness);
+        Debug.Log("Time Stamp :" + eyeData.timestamp);
+        Debug.Log("Frame: " + eyeData.frame_sequence);
+        Debug.Log("Gaze Direction left Normalized : " + eyeData.verbose_data.left.gaze_direction_normalized);
+        Debug.Log("eye_openness left: " + eyeData.verbose_data.left.eye_openness);
+        Debug.Log("Gaze Direction Right Normalized : " + eyeData.verbose_data.right.gaze_direction_normalized);
+        Debug.Log("eye_openness Right: " + eyeData.verbose_data.right.eye_openness);
         Debug.Log("pupilDiameterLeft :" + pupilDiameterLeft);
         Debug.Log("pupilDiameterRight :" + pupilDiameterRight);
         Debug.Log("pupilPositionLeft :" + pupilPositionLeft);
         Debug.Log("pupilPositionRight :" + pupilPositionRight);
-        Debug.Log("eyeOpenLeft :" + eyeOpenLeft);
+        Debug.Log("eyeOpenLeft :" + eyeOpenLeft);   
         Debug.Log(" eyeOpenRight:" + eyeOpenRight);
     }
 
