@@ -11,6 +11,7 @@ public class GazeTracker : MonoBehaviour
     [SerializeField] private LineRenderer GazeRayRenderer;
     private static EyeData_v2 eyeData = new EyeData_v2();
     private bool eye_callback_registered = false;
+    int count = 0;
     private void Start()
     {
         if (!SRanipal_Eye_Framework.Instance.EnableEye)
@@ -60,17 +61,29 @@ public class GazeTracker : MonoBehaviour
         Vector3 origin = Camera.main.transform.position - Camera.main.transform.up * 0.05f;
         if(Physics.Raycast(origin, GazeDirectionCombinedLocal,  out hit))
         {
-            if(hit.transform.gameObject != null)
-        {
-                Debug.LogError("Game Object Name" + hit.transform.gameObject.name);
+            if(hit.collider==null)
+            {
+                Debug.LogError("Error");
+            }
+            else
+            {
+
+                if (hit.transform.gameObject != null)
+                {
+                    Debug.LogError("Game Object Name" + hit.transform.gameObject.name);
+                    GameObject quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
+                    quad.gameObject.name = "New Quad :::" + count.ToString();
+                    quad.transform.position = hit.transform.position;
+                    count++;
+                }
 
             }
+           
         }
 
         
         
-        GameObject quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
-        quad.transform.position = hit.transform.position;
+       
 
         //Vector3 GazeDirectionCombined = Camera.main.transform.TransformDirection(GazeDirectionCombinedLocal);////
         GazeRayRenderer.SetPosition(0, Camera.main.transform.position - Camera.main.transform.up * 0.05f);

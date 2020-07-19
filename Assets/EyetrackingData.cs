@@ -5,12 +5,15 @@ using UnityEngine;
 //using Tobii.XR;
 using ViveSR.anipal.Eye;
 
-    
-
+//Job based scripting
+using Unity.Jobs;
+using Unity.Entities;
+using Unity.Burst;
+using Unity.Collections;
 
 public class EyetrackingData : MonoBehaviour
 {
-
+    //NativeArray<float> result = new NativeArray<float>(1, Allocator.TempJob);
 
 
 
@@ -20,65 +23,84 @@ public class EyetrackingData : MonoBehaviour
     private float pupilDiameterLeft, pupilDiameterRight;
     private Vector2 pupilPositionLeft, pupilPositionRight;
     private float eyeOpenLeft, eyeOpenRight;
-   
-
+    [SerializeField] private bool UseJobs;
+    
     void Update()
     {
-        
-        Debug.Log(System.DateTime.Now.TimeOfDay.TotalMilliseconds);
-        Debug.Log("Time millisecond"+System.DateTime.Now.Millisecond);
-        SRanipal_Eye_API.GetEyeData(ref eyeData);
-        SRanipal_Eye.GetVerboseData(out verboseData);
-        //pupil diameter    
-        pupilDiameterLeft = eyeData.verbose_data.left.pupil_diameter_mm;
-        pupilDiameterRight = eyeData.verbose_data.right.pupil_diameter_mm;
-        // pupil positions    
-        pupilPositionLeft = eyeData.verbose_data.left.pupil_position_in_sensor_area;
-        pupilPositionRight = eyeData.verbose_data.right.pupil_position_in_sensor_area;
-        // eye open  
-        eyeOpenLeft = eyeData.verbose_data.left.eye_openness;
-        eyeOpenRight = eyeData.verbose_data.right.eye_openness;
+        float time = Time.realtimeSinceStartup;
+        if(UseJobs)
+        {
+            Debug.Log("Frame: " + eyeData.frame_sequence);
+            JobHandle job = eyetestchekker();
+            job.Complete();
+        }
+        else
+        {
+            Debug.Log(System.DateTime.Now.TimeOfDay.TotalMilliseconds);
+            Debug.Log("Time millisecond" + System.DateTime.Now.Millisecond);
+            SRanipal_Eye_API.GetEyeData(ref eyeData);
+            SRanipal_Eye.GetVerboseData(out verboseData);
+            //pupil diameter    
+            pupilDiameterLeft = eyeData.verbose_data.left.pupil_diameter_mm;
+            pupilDiameterRight = eyeData.verbose_data.right.pupil_diameter_mm;
+            // pupil positions    
+            pupilPositionLeft = eyeData.verbose_data.left.pupil_position_in_sensor_area;
+            pupilPositionRight = eyeData.verbose_data.right.pupil_position_in_sensor_area;
+            // eye open  
+            eyeOpenLeft = eyeData.verbose_data.left.eye_openness;
+            eyeOpenRight = eyeData.verbose_data.right.eye_openness;
 
 
-        Debug.Log("pupilDiameterLeft :" + pupilDiameterLeft);
-        Debug.Log("pupilDiameterRight :" + pupilDiameterRight);
-        Debug.Log("pupilPositionLeft :" + pupilPositionLeft);
-        Debug.Log("pupilPositionRight :" + pupilPositionRight);
-        Debug.Log("eyeOpenLeft :" + eyeOpenLeft);
-        Debug.Log(" eyeOpenRight:" + eyeOpenRight);
+            Debug.Log("pupilDiameterLeft :" + pupilDiameterLeft);
+            Debug.Log("pupilDiameterRight :" + pupilDiameterRight);
+            Debug.Log("pupilPositionLeft :" + pupilPositionLeft);
+            Debug.Log("pupilPositionRight :" + pupilPositionRight);
+            Debug.Log("eyeOpenLeft :" + eyeOpenLeft);
+            Debug.Log(" eyeOpenRight:" + eyeOpenRight);
 
-        //Eye version 2
+            //Eye version 2
 
-        SRanipal_Eye_API.GetEyeData(ref eyeData);
-        SRanipal_Eye.GetVerboseData(out verboseData);
-        //pupil diameter    
-        pupilDiameterLeft = eyeData.verbose_data.left.pupil_diameter_mm;
-        pupilDiameterRight = eyeData.verbose_data.right.pupil_diameter_mm;
-        // pupil positions    
-        pupilPositionLeft = eyeData.verbose_data.left.pupil_position_in_sensor_area;
-        pupilPositionRight = eyeData.verbose_data.right.pupil_position_in_sensor_area;
-        // eye open  
-        eyeOpenLeft = eyeData.verbose_data.left.eye_openness;
-        eyeOpenRight = eyeData.verbose_data.right.eye_openness;
+            SRanipal_Eye_API.GetEyeData(ref eyeData);
+            SRanipal_Eye.GetVerboseData(out verboseData);
+            //pupil diameter    
+            pupilDiameterLeft = eyeData.verbose_data.left.pupil_diameter_mm;
+            pupilDiameterRight = eyeData.verbose_data.right.pupil_diameter_mm;
+            // pupil positions    
+            pupilPositionLeft = eyeData.verbose_data.left.pupil_position_in_sensor_area;
+            pupilPositionRight = eyeData.verbose_data.right.pupil_position_in_sensor_area;
+            // eye open  
+            eyeOpenLeft = eyeData.verbose_data.left.eye_openness;
+            eyeOpenRight = eyeData.verbose_data.right.eye_openness;
 
-        Debug.Log("Time Stamp :" + eyeData.timestamp);
-        Debug.Log("Frame: " + eyeData.frame_sequence);
-        Debug.Log("Gaze Direction left Normalized : " + eyeData.verbose_data.left.gaze_direction_normalized);
-        Debug.Log("eye_openness left: " + eyeData.verbose_data.left.eye_openness);
-        Debug.Log("Gaze Direction Right Normalized : " + eyeData.verbose_data.right.gaze_direction_normalized);
-        Debug.Log("eye_openness Right: " + eyeData.verbose_data.right.eye_openness);
-        Debug.Log("pupilDiameterLeft :" + pupilDiameterLeft);
-        Debug.Log("pupilDiameterRight :" + pupilDiameterRight);
-        Debug.Log("pupilPositionLeft :" + pupilPositionLeft);
-        Debug.Log("pupilPositionRight :" + pupilPositionRight);
-        Debug.Log("eyeOpenLeft :" + eyeOpenLeft);   
-        Debug.Log(" eyeOpenRight:" + eyeOpenRight);
+            Debug.Log("Time Stamp :" + eyeData.timestamp);
+            Debug.Log("Frame: " + eyeData.frame_sequence);
+            Debug.Log("Gaze Direction left Normalized : " + eyeData.verbose_data.left.gaze_direction_normalized);
+            Debug.Log("eye_openness left: " + eyeData.verbose_data.left.eye_openness);
+            Debug.Log("Gaze Direction Right Normalized : " + eyeData.verbose_data.right.gaze_direction_normalized);
+            Debug.Log("eye_openness Right: " + eyeData.verbose_data.right.eye_openness);
+            Debug.Log("pupilDiameterLeft :" + pupilDiameterLeft);
+            Debug.Log("pupilDiameterRight :" + pupilDiameterRight);
+            Debug.Log("pupilPositionLeft :" + pupilPositionLeft);
+            Debug.Log("pupilPositionRight :" + pupilPositionRight);
+            Debug.Log("eyeOpenLeft :" + eyeOpenLeft);
+            Debug.Log(" eyeOpenRight:" + eyeOpenRight);
+
+        }
+       
+
+        Debug.Log((Time.realtimeSinceStartup - time) * 1000f + "ms :::" + UseJobs);
+       // Debug.Log((Time.realtimeSinceStartup - time) * 1000f + "ms");
     }
 
 
 
 
-   
+   private JobHandle eyetestchekker()
+    {
+        eyetest awesomeJob = new eyetest();
+        return awesomeJob.Schedule();
+
+    }
 
     /*
  EyeData data;
@@ -149,4 +171,67 @@ public class EyetrackingData : MonoBehaviour
 }*/
 }
 
+[BurstCompile]
+struct eyetest : IJob
+{
 
+    private static EyeData eyeData;
+    private static EyeData_v2 EyeData2;
+    private static VerboseData verboseData;
+    private float pupilDiameterLeft, pupilDiameterRight;
+    private Vector2 pupilPositionLeft, pupilPositionRight;
+    private float eyeOpenLeft, eyeOpenRight;
+
+
+    public void Execute()
+    {
+        Debug.Log(System.DateTime.Now.TimeOfDay.TotalMilliseconds);
+        Debug.Log("Time millisecond" + System.DateTime.Now.Millisecond);
+        SRanipal_Eye_API.GetEyeData(ref eyeData);
+        SRanipal_Eye.GetVerboseData(out verboseData);
+        //pupil diameter    
+        pupilDiameterLeft = eyeData.verbose_data.left.pupil_diameter_mm;
+        pupilDiameterRight = eyeData.verbose_data.right.pupil_diameter_mm;
+        // pupil positions    
+        pupilPositionLeft = eyeData.verbose_data.left.pupil_position_in_sensor_area;
+        pupilPositionRight = eyeData.verbose_data.right.pupil_position_in_sensor_area;
+        // eye open  
+        eyeOpenLeft = eyeData.verbose_data.left.eye_openness;
+        eyeOpenRight = eyeData.verbose_data.right.eye_openness;
+
+
+        Debug.Log("pupilDiameterLeft :" + pupilDiameterLeft);
+        Debug.Log("pupilDiameterRight :" + pupilDiameterRight);
+        Debug.Log("pupilPositionLeft :" + pupilPositionLeft);
+        Debug.Log("pupilPositionRight :" + pupilPositionRight);
+        Debug.Log("eyeOpenLeft :" + eyeOpenLeft);
+        Debug.Log(" eyeOpenRight:" + eyeOpenRight);
+
+        //Eye version 2
+
+        SRanipal_Eye_API.GetEyeData(ref eyeData);
+        SRanipal_Eye.GetVerboseData(out verboseData);
+        //pupil diameter    
+        pupilDiameterLeft = eyeData.verbose_data.left.pupil_diameter_mm;
+        pupilDiameterRight = eyeData.verbose_data.right.pupil_diameter_mm;
+        // pupil positions    
+        pupilPositionLeft = eyeData.verbose_data.left.pupil_position_in_sensor_area;
+        pupilPositionRight = eyeData.verbose_data.right.pupil_position_in_sensor_area;
+        // eye open  
+        eyeOpenLeft = eyeData.verbose_data.left.eye_openness;
+        eyeOpenRight = eyeData.verbose_data.right.eye_openness;
+
+        Debug.Log("Time Stamp :" + eyeData.timestamp);
+      //  Debug.Log("Frame: " + eyeData.frame_sequence);
+        Debug.Log("Gaze Direction left Normalized : " + eyeData.verbose_data.left.gaze_direction_normalized);
+        Debug.Log("eye_openness left: " + eyeData.verbose_data.left.eye_openness);
+        Debug.Log("Gaze Direction Right Normalized : " + eyeData.verbose_data.right.gaze_direction_normalized);
+        Debug.Log("eye_openness Right: " + eyeData.verbose_data.right.eye_openness);
+        Debug.Log("pupilDiameterLeft :" + pupilDiameterLeft);
+        Debug.Log("pupilDiameterRight :" + pupilDiameterRight);
+        Debug.Log("pupilPositionLeft :" + pupilPositionLeft);
+        Debug.Log("pupilPositionRight :" + pupilPositionRight);
+        Debug.Log("eyeOpenLeft :" + eyeOpenLeft);
+        Debug.Log(" eyeOpenRight:" + eyeOpenRight);
+    }
+}

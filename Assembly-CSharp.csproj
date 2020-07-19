@@ -62,8 +62,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\EyeTracking.cs" />
     <Compile Include="Assets\EyetrackingData.cs" />
     <Compile Include="Assets\GazeTracker.cs" />
+    <Compile Include="Assets\HandllemyJobs.cs" />
     <Compile Include="Assets\TobiiXR\Examples\DataTransparency_Example\DataTransparencyPopup.cs" />
     <Compile Include="Assets\TobiiXR\Examples\DataTransparency_Example\PulsateColor.cs" />
     <Compile Include="Assets\TobiiXR\Examples\HandEyeCoordination_Example\Plugins\Tobii.HEC.Interop.cs" />
@@ -212,32 +214,14 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Burst">
+      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Burst.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Timeline">
-      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Burst">
-      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Burst.dll</HintPath>
+    <Reference Include="Unity.Entities.Properties">
+      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Entities.Properties.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Jobs">
       <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Jobs.dll</HintPath>
@@ -245,26 +229,17 @@
     <Reference Include="Unity.Jobs.Editor">
       <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Jobs.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Burst.Editor">
-      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Burst.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Collections">
-      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Collections.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Mathematics">
-      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Mathematics.Editor">
-      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Entities.Properties">
-      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Entities.Properties.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Entities.Editor">
       <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Entities.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Entities.StaticTypeRegistry">
       <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Entities.StaticTypeRegistry.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Editor">
+      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Burst.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Collections">
+      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Scenes.Hybrid">
       <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Scenes.Hybrid.dll</HintPath>
@@ -272,17 +247,35 @@
     <Reference Include="Unity.Scenes.Editor">
       <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Scenes.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Mathematics.Extensions">
       <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Mathematics.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics.Extensions.Hybrid">
       <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Mathematics.Extensions.Hybrid.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Timeline">
+      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.CollabProxy.Editor">
+      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Entities.BuildUtils">
       <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Entities.BuildUtils.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Entities.Hybrid">
       <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Entities.Hybrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Properties">
       <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Properties.dll</HintPath>
@@ -295,6 +288,15 @@
     </Reference>
     <Reference Include="Unity.Transforms.Editor">
       <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Transforms.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics.Editor">
+      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Transforms.Hybrid">
       <HintPath>C:/Eyetracking test/Library/ScriptAssemblies/Unity.Transforms.Hybrid.dll</HintPath>
